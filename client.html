@@ -1,19 +1,25 @@
-
-
-<div id='chatlog'>
-  <p>Chatlog:</p>
+<div id = 'chatlog'>
 </div>
-<input type='button' onclick="sendMessage()" value="Send" />
-<input type='text' id="message">
+<input type="text" id="message" onkeypress = "enter(event)") </input>
+<input type="button" onclick = "sendMessage()" value="Submit"></input>
 
 <script>
-  var ws = new WebSocket('ws://192.168.1.37:2000', 'echo-protocol');
-  function sendMessage() {
-    var message = document.getElementById('message').value;
-    ws.send(message);
-  }
-  ws.addEventListener("message", function(e) {
-    var msg = e.data;
-    document.getElementById('chatlog').innerHTML += '<br>' + msg;
-  })
+function enter(e){
+        if(e.keyCode == 13){
+          sendMessage();
+        }
+
+        return false;
+    }
+var ws = new WebSocket('ws://localhost:1234', 'echo-protocol');
+function sendMessage(){
+  var message = document.getElementById('message').value;
+  if(message != "")
+  ws.send(message);
+  document.getElementById('message').value = null;
+}
+ws.addEventListener("message", function(e){
+  var msg = e.data;
+  document.getElementById('chatlog').innerHTML += '<br>' + msg;
+});
 </script>
