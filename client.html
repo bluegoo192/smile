@@ -1,25 +1,155 @@
 <div id = 'chatlog'>
 </div>
-<input type="text" id="message" onkeypress = "enter(event)") </input>
+<input type="text" id="message" onkeypress = "enter(event)")> </input>
 <input type="button" onclick = "sendMessage()" value="Submit"></input>
+<div id='yourID'></div>
 
-<script>
-function enter(e){
-        if(e.keyCode == 13){
-          sendMessage();
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        // retrieve database name from url (for example "tasks")
+        var DATABASE = "/" + window.location.href.split("/")[3];
+        var messageStack = [];
+        var stackCount = 1;
+        function getTasks() {
+          //stackCount = messageStack.size() + 1;
+            messageStack = [];
+            $.ajax({
+                url: DATABASE + "/_design/tasks/_view/tasks",
+                success: function (data){
+                    var view = JSON.parse(data);
+                    var tasks = [];
+                    $(view.rows).each( function (index, item) {
+                        tasks.push (item.value);
+                        messageStack.push(item.value);
+                    });
+                    displayTasks(tasks);
+                }
+             });
         }
 
-        return false;
-    }
-var ws = new WebSocket('ws://localhost:1234', 'echo-protocol');
-function sendMessage(){
-  var message = document.getElementById('message').value;
-  if(message != "")
-  ws.send(message);
-  document.getElementById('message').value = null;
-}
-ws.addEventListener("message", function(e){
-  var msg = e.data;
-  document.getElementById('chatlog').innerHTML += '<br>' + msg;
-});
-</script>
+        function displayTasks(tasks) {
+            var html = "<table>";
+            $(tasks).each( function (index, task) {
+                var del = "<input type='button' value='Delete' " +
+                    "onclick='deleteMessage(" + JSON.stringify(task) + ", "+false+")' />";
+
+                html += "<tr>";
+                html += "<td>" + task.task + "</td>";
+                html += "<td>" + del + "</td>";
+                html += "</tr>";
+            });
+            html += "</table>";
+
+            $('#tasks').empty();
+            $('#tasks').append(html);
+        }
+
+        function addMessage() {
+            var desc = prompt("Enter message");
+            if (desc) {
+                var task = {
+                    "task": desc,
+                    "index": stackCount
+                };
+                $.ajax({
+                    type: "POST",
+                    url: DATABASE,
+                    contentType: "application/json",
+                    data: JSON.stringify(task),
+                    success: function () {
+                        getTasks();
+                    }
+                 });
+            }
+        }
+
+        function deleteMessage(task, bypass) {
+            if(bypass == false){
+              var doit = confirm("Do you really want to delete the task '" +
+                task.task + "'?");
+              }
+            if (doit || bypass) {
+              stackCount -= 1;
+                $.ajax({
+                    type: "DELETE",
+                    url: DATABASE + "/" + task._id + "?rev=" + task._rev,
+                    success: function () {
+                        getTasks();
+                    }
+                 });
+            }
+        }
+
+        // create view (will fail if already existing)
+        function createView() {
+            var view = {
+               "language": "javascript",
+               "views": {
+                   "tasks": {
+                       "map": "function(doc) {if (doc.index) {emit(doc.task, doc);}}"
+                   }
+               }
+            }
+            $.ajax({
+                type: "PUT",
+                url: DATABASE + "/_design/tasks",
+                contentType: "application/json",
+                data: JSON.stringify(view)
+             });
+        }
+
+        function requestMessage(){
+           var t = messageStack.pop();
+           alert(t.task);
+           deleteMessage(t, true);
+        }
+
+        function returnIndex(){
+          alert(stackCount);
+        }
+
+        //------------     OTHER STUFF FROM HERE ON OUT (CHAT CLIENT) ---------
+
+        function enter(e){
+                if(e.keyCode == 13){
+                  sendMessage();
+                }
+
+                return false;
+            }
+        var ws = new WebSocket('ws://localhost:1234', 'echo-protocol');
+        function sendMessage(){
+          var message = document.getElementById('message').value;
+          if(message != "")
+          ws.send(message);
+          document.getElementById('message').value = null;
+        }
+        function checkID(){
+          var msg = "id";
+          ws.send(msg);
+        }
+        ws.addEventListener("message", function(e){
+          var msg = e.data;
+          var check = msg.split(';')[0];
+          if(check == "id"){
+              document.getElementById('yourID').innerHTML = 'You are User ' + msg.split(';')[1];
+            }
+            else{
+              document.getElementById('chatlog').innerHTML += '<br>' + msg;
+        }
+        });
+        function refresh(){
+          getTasks();
+        }
+        </script>
+</head>
+<body onload="createView(); getTasks();">
+  <h1>MESSAGES</h1>
+  <input type="button" id="add" value="Add" onclick="addMessage();" />
+  <input type="button" id="request" value="Request" onclick="requestMessage();" />
+  <input type="button" id="index" value="Current Index" onclick="returnIndex();" />
+  <input type="button" id="id" value="Check ID" onclick="checkID();"/>
+  <input type="button" id="refresh" value="Refresh List" onclick="refresh();" />
+  <div id="tasks"></div>
+</body>
