@@ -1,0 +1,21 @@
+<form name="login" action="login_handler" method="POST">
+
+</form>
+
+<div id='chatlog'>
+  <p>Chatlog:</p>
+</div>
+<input type='button' onclick="sendMessage()" value="Send" />
+<input type='text' id="message">
+
+<script>
+  var ws = new WebSocket('ws://192.168.1.37:2000', 'echo-protocol');
+  function sendMessage() {
+    var message = document.getElementById('message').value;
+    ws.send(message);
+  }
+  ws.addEventListener("message", function(e) {
+    var msg = e.data;
+    document.getElementById('chatlog').innerHTML += '<br>' + msg;
+  })
+</script>
