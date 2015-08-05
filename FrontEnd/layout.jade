@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+      title Smile
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+      script.
+        var offset;
+        $(window).load(function() {
+          offset = $('#nav').outerHeight();
+          if ($(window).scrollTop() > ($(window).height() - offset)) {
+            $('#nav').attr('id', 'navbar-fixed');
+            $('#about_link').attr('class', 'active');
+          }
+        });
+        $(document).ready(function() {
+          $(window).scroll(function () {
+              //if you hard code, then use console
+              //.log to determine when you want the
+              //nav bar to stick.
+              console.log($(window).scrollTop())
+            if ($(window).scrollTop() > ($(window).height() - offset)) {
+              $('#nav').attr('id', 'navbar-fixed');
+              $('#about_link').attr('class', 'active');
+            }
+            if ($(window).scrollTop() < ($(window).height() - offset)) {
+              $('#navbar-fixed').attr('id', 'nav');
+              $('#about_link').removeClass("active");
+            }
+          });
+        });
+
+    body
+      .screen
+        .divider
+        .divider
+        block splash
+        .divider
+        block sign
+        block bottombar
+        block about
+        block footer
+      #about_screen.screen
+      .screen
