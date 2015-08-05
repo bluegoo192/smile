@@ -1,0 +1,99 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  color: #d1d1d1;
+  font: 10em "Century Gothic", Helvetica, Arial, sans-serif;
+}
+
+.center {
+  display: table;
+  margin: 0 auto;
+}
+
+#logbox {
+  font-size: 1.3em;
+} #logbox .generic-container {
+  display: table-cell;
+  position: relative;
+}
+
+.screen {
+  height: 100vh;
+  background-color: #fff;
+} .screen:first-child {
+  background-image: url("http://www.myphotodump.com/content/uploads/2014/02/extremely-brilliant-starry-night-at-dee-why-coastline-sydney-2500-x-1667.jpg");
+  background-size: 100% auto;
+  background-attachment: fixed;
+  color: #FFDD8A;
+} .screen:first-child a {
+  color: inherit;
+} .divider {
+  height: 10vh;
+  display: block;
+}
+
+li:active {
+  color: #861B02;
+}
+
+button {
+  background: none;
+  padding: 15px 20px;
+  border: none;
+  font: inherit;
+  color: #FFDD8A;
+} button:hover {
+  text-decoration: underline;
+}
+
+#nav {
+  display: flex;
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+} #navbar-fixed {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  justify-content: center;
+  color: #000;
+} ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  width: 90%;
+}
+li {
+  display: flex;
+} li:hover > a  {
+  background-color: #fff;
+  color: #000;
+} li a {
+  padding: 15px 25px;
+}
+
+a {
+  text-decoration: none;
+} .active {
+  color: #861B02;
+}
+
+.signbox {
+  display: none;
+  top: 0;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #864602;
+  padding: 10px;
+}
