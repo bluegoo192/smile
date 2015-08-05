@@ -1,0 +1,36 @@
+extends layout
+
+block splash
+  h1.center Brighten the world
+
+block sign
+  #logbox.center
+    .generic-container
+      button(onclick="$('#signup_box').toggle(); $('#login_box').hide()") Sign Up
+      #signup_box.signbox
+        h2 Sign Up
+    .generic-container
+      button(onclick="$('#login_box').toggle(); $('#signup_box').hide()") Log In
+      #login_box.signbox
+        form(class='form-signin', action='/login', method='POST')
+          input(type='text', name='username' class='form-control', placeholder='Email',required, autofocus)
+          input(type='password', name='password' class='form-control', placeholder='Password', required)
+          button(class='btn btn-lg btn-primary btn-block', type='submit') Log In
+
+
+block bottombar
+  #nav
+      ul
+          li(id="about_link")
+            a(href="#about_screen") About
+          li
+            a Share
+          li
+            a FAQ
+          li
+            a Contact
+
+
+block about
+
+block footer
