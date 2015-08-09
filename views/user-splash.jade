@@ -1,0 +1,11 @@
+extends user
+
+block user-content
+  p.
+    Welcome to your Smile profile.  You can choose to send a voice in real-time, or record
+    one.  You can also ask someone to send you a voice, either recorded or live.  You can
+    even have a live chat!
+  .divider
+  div.center.flex-space-around-container
+    form(action='/user/send' method='GET'): button#send-button(type='submit') send a voice
+    form(action='/user/req' method='GET'): button#req-button(type='submit') request a voice

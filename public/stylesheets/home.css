@@ -1,0 +1,175 @@
+html {
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Open Sans', Helvetica, Arial sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #fff;
+  font: 15vh "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+.center {
+  display: table;
+  margin: 0 auto;
+}
+
+#logbox {
+  font-size: 1.4em;
+} #logbox .generic-container {
+  display: table-cell;
+  position: relative;
+}
+
+.screen {
+  height: 100vh;
+  background-color: #fff;
+} .screen:first-child {
+  background-image: url("http://www.myphotodump.com/content/uploads/2014/02/extremely-brilliant-starry-night-at-dee-why-coastline-sydney-2500-x-1667.jpg");
+  background-size: 100% auto;
+  background-attachment: fixed;
+  color: #FFDD8A;
+  font-weight: 400;
+} .screen:first-child a {
+  color: inherit;
+} .divider {
+  height: 5vh;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+li:active {
+  color: #861B02;
+}
+
+button {
+  background: none;
+  padding: 15px 20px;
+  border: none;
+  font: inherit;
+  color: #FFDD8A;
+} button:hover {
+  text-decoration: underline;
+}
+
+#nav {
+  display: flex;
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  font-size: 1.3em;
+} #navbar-fixed {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  justify-content: center;
+  color: #4D4D4D;
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 1.3em;
+} ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  width: 90%;
+}
+li {
+  display: flex;
+} #nav li:hover > a  {
+  background-color: #fff;
+  color: #000;
+} li a {
+  padding: 15px 25px;
+}
+
+a {
+  text-decoration: none;
+  color: #AC6519;
+} .active {
+  color: #861B02;
+} a:hover, #navbar-fixed a:hover {
+  color: #D18533;
+} article a:hover {
+  text-decoration: underline;
+}
+
+#signup_box {
+  right: 0;
+} .signbox {
+  display: none;
+  top: -15px;
+  position: absolute;
+  background-color: #FAFAFA;
+  border: 1px solid #FFDD8A;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0px 0px 8px #FFDD8A;
+} .signbox button {
+  color: #864602;
+} input {
+  border-radius: 3px;
+  color: #7D7D7D;
+  border: 1px solid #D1D1D1;
+  padding: 5px 8px;
+  margin-bottom: 8px;
+} input:focus {
+  border: 1px solid #D18533;
+  box-shadow: 0px 0px 2px #D18533;
+}
+
+.content {
+  width: 70%;
+  overflow: auto;
+} article h2 {
+  font-family: 'Montserrat', sans-serif;
+  color: #865F02;
+  font-size: 50px;
+} article {
+  color: #5C5C5C;
+  font-size: 1.2em;
+  overflow: auto;
+  padding-right: 10%;
+} .right {
+  text-align: right;
+  padding-left: 10%;
+  padding-right: 0;
+} article td:first-child {
+  font-weight: bold;
+  padding-right: 40px;
+} article img {
+  float: right;
+  width: 25%;
+  border-radius: 10px;
+  border: 13px solid rgba(255, 221, 138, 0.75);
+} article p {
+  margin-right: 20px;
+} .right p {
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+  background-color: #D18533;
+  border-top: 1px solid #864602;
+  margin: 0;
+  padding: 40px 0px 30px 0px;
+  overflow: hidden;
+  color: #fff;
+} footer p {
+  margin: 0;
+  padding: 0;
+}

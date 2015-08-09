@@ -1,0 +1,23 @@
+extends layout
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/profile.css')
+
+block nav-script
+
+
+block content
+	#nav
+		ul
+			li: a(href="#about_screen") About
+			li: a Share
+			li: a(href="#faq") FAQ
+			li: a Contact
+	#main-content-container.center.flex-space-around-container
+		#profile-container
+			img#profile-pic(src="http://www.priorlakeassociation.org/wp-content/uploads/2011/06/blank-profile.png")
+			p hello #{user.username}
+			p #{user.credits} credits (#[a(href='') get credits!])
+			a(href='/signout') Sign out
+		#content
+			block user-content

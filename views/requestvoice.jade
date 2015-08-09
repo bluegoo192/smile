@@ -1,0 +1,15 @@
+extends user
+
+block user-content
+  form(action='/send-confirmation' method='POST')
+    label
+      input(type='radio' name='voicetype' value='recorded')
+      | Pre-recorded(recorded voices are always less than a week old)
+    br
+    label
+      input(type='radio' name='voicetype' value='live')
+      | live
+    br
+    .divider
+    button#req-button(type='submit') brighten your day
+    a.small-left-padding(href='/user') back

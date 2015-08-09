@@ -1,0 +1,102 @@
+body {
+  font-family: 'Open Sans', Helvetica, Arial sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  color: #454545;
+}
+
+.divider {
+ height: 5vh;
+ display: block;
+ margin: 0;
+ padding: 0;
+}
+
+.center {
+  display: table;
+  margin: 0 auto;
+}
+
+.flex-space-around-container {
+  display: flex;
+  justify-content: space-around;
+} .small-left-padding {
+  padding-left: 6px;
+}
+
+#main-content-container {
+  /*background-color: rgba(0, 150, 48, 0.3); for testing only */
+  width: 70%;
+  padding-top: 30px;
+} #profile-container {
+  /*background-color: rgba(0, 150, 48, 0.3); for testing only */
+  padding: 20px;
+  width: 30%;
+  max-width: 250px;
+  text-align: center;
+} #content {
+  /*background-color: rgba(117, 121, 235, 0.3); for testing only */
+  min-width: 30%;
+  max-width: 55%;
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #AC6519;
+} button {
+  padding: 10px;
+  color: #fff;
+  border-radius: 0;
+  font: inherit;
+  font-weight: 400;
+  margin: 2px;
+}
+
+input[type='checkbox'] {
+  width: 19px;
+  height: 19px;
+  background: #FFC78A;
+  border: 1px solid #D18533;
+} input[type='checkbox']:checked {
+  background: #D18533;
+}
+
+#nav {
+ display: flex;
+ width: 100%;
+ top: 0;
+ justify-content: center;
+ color: #4D4D4D;
+ font-size: 1.3em;
+} ul {
+ margin: 0;
+ padding: 0;
+ display: flex;
+ list-style-type: none;
+ justify-content: space-around;
+ width: 90%;
+}
+li {
+ display: flex;
+} #nav li:hover > a  {
+ background-color: #fff;
+ color: #000;
+} li a {
+ padding: 15px 25px;
+}
+
+#profile-pic {
+  width: 100%;
+} #send-button {
+  background-color: #D1A333;
+  border: 2px solid #865F02;
+} #send-button:hover {
+  background-color: #865F02
+}#req-button {
+  background-color: #D15133;
+  border: 2px solid #861B02;
+} #req-button:hover {
+  background-color: #861B02;
+}

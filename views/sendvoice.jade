@@ -1,0 +1,11 @@
+extends user
+
+block user-content
+  form(action='/send-confirmation' method='POST')
+    label
+      input(type='checkbox' name='anonymity' value='anonymous')
+      | Send anonymously
+    br
+    .divider
+    button#send-button(type='submit') make someone's day!
+    a.small-left-padding(href='/user') back

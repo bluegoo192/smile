@@ -1,0 +1,120 @@
+extends index
+
+block stylesheet
+  link(rel='stylesheet', href='/stylesheets/home.css')
+
+block nav-script
+  script.
+    var offset;
+    $(window).load(function() {
+      offset = $('#nav').outerHeight();
+      if ($(window).scrollTop() > ($(window).height() - offset)) {
+        $('#nav').attr('id', 'navbar-fixed');
+        $('#about_link').attr('class', 'active');
+      }
+    });
+    $(document).ready(function() {
+      $(window).scroll(function () {
+          console.log($(window).scrollTop())
+        if ($(window).scrollTop() > ($(window).height() - offset)) {
+          $('#nav').attr('id', 'navbar-fixed');
+          $('#about_link').attr('class', 'active');
+        }
+        if ($(window).scrollTop() < ($(window).height() - offset)) {
+          $('#navbar-fixed').attr('id', 'nav');
+          $('#about_link').removeClass("active");
+        }
+      });
+    });
+
+block splash
+  h1.center Brighten the world
+
+block sign
+  #logbox.center
+    .generic-container
+      button(onclick="$('#signup_box').toggle(); $('#login_box').hide()") Sign Up
+      #signup_box.signbox
+        form(class='form-signin', action='/signup', method='POST')
+          input(type='text', name='username', placeholder='Username',required, autofocus)
+          input(type='password', name='password', placeholder='Password', required)
+          input(type='email', name='email', placeholder='Email',required)
+          input(type='text', name='firstName', placeholder='First Name',required)
+          input(type='text', name='lastName', placeholder='Last Name',required)
+          button.center(type='submit') Register
+    .generic-container
+      button(onclick="$('#login_box').toggle(); $('#signup_box').hide()") Log In
+      #login_box.signbox
+        form(action='/login', method='POST')
+          input(type='text', name='username', placeholder='Username',required, autofocus)
+          input(type='password', name='password', placeholder='Password', required)
+          button.center(type='submit') Log In
+      #message
+      if message
+        p #{message}
+
+
+block bottombar
+  #nav
+      ul
+          li(id="about_link")
+            a(href="#about_screen") About
+          li
+            a Share
+          li
+            a(href="#faq") FAQ
+          li
+            a Contact
+
+
+block about
+  article
+
+    h2 What is Smile?
+    img(src="http://www.linkkr.co/wp-content/uploads/2015/04/two-female-friends-hugging-and-smiling.jpg")
+    p.
+      We created Smile for one purpose: to connect people positively.  Smile
+      allows you have genuine, uplifting conversations by matching users together
+      in real time.
+    p.
+      Smile is for anyone who wants a pick-me-up, or simply to feel good.  Maybe
+      you've had a bad day at work.  Maybe you suffer from anxiety or depression.
+      Maybe you simply want to smile.  Here, you can always add a bit of happiness
+      to your day.
+  .divider
+  article.right
+    h2 Who we are
+    p.
+      Smile is made with love by a small group of California university students.
+      We are passionate about using our skills to make the world a better place.
+    a Meet the team
+  .divider
+  article
+    h2 Future plans
+    p.
+      We intend to continue running and maintaining Smile as long as people use it.
+      Besides that, though, who knows?
+    p.
+      Whatever happens, we promise never to sell your data, use intrusive advertising,
+      or "sell out" to a company that doesn't match our mission.
+    p.
+      Feel free to #[a send us suggestions]!
+
+block faq
+  article
+    h2 Frequently asked
+    table
+      tr
+        td: p What does it cost?
+        td: p Nothing.  Smile is completely free.
+      tr
+        td: p How do you make money?
+        td: p At the moment, we don't.  The site is run off #[a donations] and our own money.
+      tr
+        td: p How do you handle abusive behavior?
+        td: p We have a strict, robust report and rating system.  Toxic users are banned quickly and permanently.
+
+block footer
+  footer
+    p Copyright 2015, NGNL Holdings
+    p Web design by Arthur Silverstein and Michael Qu
